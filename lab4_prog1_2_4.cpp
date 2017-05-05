@@ -462,8 +462,7 @@ void *temperature_reading(void* arg4)
  // Register the signal handler 
  signal(SIGINT, signal_handler);
 
-
- while(1)
+	while(1)
    {
      // Using I2C Read
      if (read(fd,buf,2) != 2) {
@@ -490,26 +489,9 @@ void *temperature_reading(void* arg4)
 
 }
 
-
  
 void *image_capture(void* arg5)
 {
-	
-	useconds_t delay = 2000;
-				//if (readTemp >= 27)
-			//{
-				//printf("THRESHOLD REACHED: REQUESTING IMAGE\n");
-			int fd;
-				char buffer[100];
-				sprintf(buffer, "./run");
-				system(buffer);
-				cout << "cannot open camera";
-				usleep(delay);
-			//}
-        //}
-
-        close(fd);
-	/*using namespace cv;
 	
 	VideoCapture stream1(0);  		 
  
@@ -517,19 +499,17 @@ void *image_capture(void* arg5)
 	{
 		cout << "cannot open camera";
 	}
-
-	while (true) 
-	{
-		Mat cameraFrame;
-		stream1.read(cameraFrame);
-		imwrite("/home/root/G8_image.jpg", cameraFrame);
-		imshow("cam", cameraFrame);
-		//if (waitKey(30) >= 0)
-		//break;
-		cout<<"the camera is capturing you!!!!"<<endl;
-	}*/		     
+ 
+	while (true) {
+			Mat cameraFrame;
+			stream1.read(cameraFrame);
+			imwrite("/media/card/capture_Image/image.png", cameraFrame);
+			imshow("cam", cameraFrame);
+			if (waitKey(30) >= 0)
+			break;
+		     }
+	return 0;		     
 }
-
 
 
 void *client_server(void* arg6)
